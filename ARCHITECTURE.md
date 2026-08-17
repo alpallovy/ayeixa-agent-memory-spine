@@ -1,16 +1,14 @@
-# Architecture Specification: Ayeixa Agent Memory Spine
+# Architecture: Ayeixa Agent Memory Spine
 
-## System Overview
-Architecture overview for Ayeixa Agent Memory Spine
+## Overview
+Memory Spine manages agent state persistence, strict tenant boundary enforcement, and context compression.
 
-## Architecture Diagram (Mermaid)
+## System Topology
 ```mermaid
 flowchart TD
-    Client["Client Application / Runtime"] --> Router["Ayeixa Agent Memory Spine Core"]
-    Router --> Engine["Execution & Boundary Engine"]
-    Engine --> Output["Verified Output / State"]
+    Agent["Agent Execution"] --> Isolator["Session Isolation Engine"]
+    Isolator --> Store["Episodic Memory Store"]
+    Store --> Compactor["Memory Compactor & Deduplication"]
+    Compactor --> Replay["Contextual Replay Engine"]
+    Replay --> Context["Prompt Context Window"]
 ```
-
-## Design Guarantees
-- **Permissive & Standalone**: Operates hermetically without proprietary enterprise lock-in.
-- **Fail-Closed**: Rejects malformed or untrusted inputs at boundary layer.
