@@ -3,7 +3,7 @@
 ## 1. Introduction & Overview
 Long-running agentic workflows require access to past conversational turns, error precedents, and decision logs. In multi-tenant environments, storing and retrieving historical context presents two major risks: cross-tenant state leakage and context-window token overflow.
 
-**Ayeixa Agent Memory Spine** (`@ayeixa/agent-memory-spine`) is an open-source TypeScript engine providing transactional multi-tenant session isolation, episodic memory indexing, and token-budgeted replay compaction.
+**Ayeixa Agent Memory Spine** (`@ayeixa/agent-memory-spine`) is an open-source TypeScript engine providing tenant and session namespaced in-memory episodic storage, memory indexing, and token-budgeted replay compaction.
 
 - **GitHub Repository**: [https://github.com/alpallovy/ayeixa-agent-memory-spine](https://github.com/alpallovy/ayeixa-agent-memory-spine)
 - **Status**: Pre-Release (`v0.1.0-alpha`)
@@ -15,7 +15,7 @@ Long-running agentic workflows require access to past conversational turns, erro
 ## 2. Core Architecture
 The system consists of four cooperating components:
 
-1. **SessionIsolationEngine**: Enforces cryptographic boundaries between tenant and session identifiers, preventing cross-tenant access.
+1. **SessionIsolationEngine**: Enforces tenant/session key isolation (`${tenantId}::${sessionId}`) and verifies that distinct tenant namespaces share zero episodic records.
 2. **EpisodicMemoryStore**: Structured in-memory storage for episodic events, tags, timestamps, and importance ratings.
 3. **ContextualReplayEngine**: Retrieves relevant episodes within an exact token ceiling, formatting them into compact replay prompts.
 4. **MemoryCompactor**: Applies relevance decay and deduplication to maintain high signal-to-noise ratio within limited context budgets.
@@ -24,7 +24,7 @@ The system consists of four cooperating components:
 
 ## 3. Implemented Capabilities & Test Verification
 Verified with hermetic unit tests:
-- **Tenant Isolation**: Absolute boundary enforcement across tenant IDs (`tests/isolation.test.ts`).
+- **Namespaced Isolation**: Zero cross-tenant data overlap verified via `verifyIsolation` (`tests/isolation.test.ts`).
 - **Contextual Replay**: Token-budgeted episode reconstruction (`tests/replay.test.ts`).
 - **Memory Compaction**: Deduplication and relevance decay algorithms (`tests/compactor.test.ts`).
 
@@ -69,7 +69,7 @@ console.log("Replay Context Episodes:", context.episodes);
 
 ## 5. Limitations & Roadmap
 - Pre-release `v0.1.0-alpha`.
-- Distributed WAL persistence and vector index integrations are planned for the 2026–2028 roadmap.
+- Operates as an in-memory store; persistent database adapters and vector embeddings are planned on the roadmap.
 - Public npm publication is pending.
 
 ---
