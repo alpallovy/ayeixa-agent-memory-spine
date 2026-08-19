@@ -27,3 +27,7 @@ Thank you for your interest in contributing to ayeixa-agent-memory-spine!
 - Strict TypeScript with zero type bypassing (`noAny`, full typings).
 - 100% passing hermetic unit and integration tests.
 - Clear TSDoc comments on exported functions and classes.
+
+## Real-world feedback
+
+If you evaluated this project in a real workflow, share technical feedback (including negative results) in [Discussions](https://github.com/alpallovy/ayeixa-agent-memory-spine/discussions/5). Case-study use requires explicit permission.
