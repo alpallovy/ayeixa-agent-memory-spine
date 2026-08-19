@@ -47,8 +47,18 @@ const context = replay.buildReplayContext("tenant-1", "session-A", { maxTokenBud
 console.log("Replay Episodes:", context.episodes);
 ```
 
+## Feedback & real-world use
+
+If you try this project in a real workflow, share technical feedback — including negative results or integration problems — in [Discussions](https://github.com/alpallovy/ayeixa-agent-memory-spine/discussions/5). Participation is voluntary; no payment required. With explicit permission, useful experiences may become attributed or anonymized case studies.
+
 ## License
 Distributed under the **MIT** License. See `LICENSE` for details.
 
-## Technical Deep Dive
-Read the full launch technical article: [`docs/blog/introducing-ayeixa-agent-memory-spine.md`](docs/blog/introducing-ayeixa-agent-memory-spine.md)
+## Engineering blog
+
+- [Agent Memory Spine tenant isolation](https://alpallovy.github.io/ayeixa-blog/blog/agent-memory-spine-tenant-isolation)
+- [DEV Community intro](https://dev.to/alp_allovi_45214d2d8316a1/introducing-ayeixa-agent-memory-spine-multi-tenant-episodic-storage-replay-compaction-4goe)
+
+## Feedback
+
+After local evaluation (`npm test`), open a [GitHub issue](https://github.com/alpallovy/ayeixa-agent-memory-spine/issues) with integration feedback.
